@@ -3,50 +3,28 @@
 <title>Instascan</title>
 <!--Defign: https://codepen.io/kani339/pen/abBQZop -->
 
-<style>
-
-
-/* 
-#preview{
-   width:500px;
-   height: 500px;
-   margin:0px auto;
-    align-content: center;
-} */
-</style>
 </head>
-<body>
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
-<div class="ocrloader">
-<video id="previewss"></video>
-	<div class="btn-group btn-group-toggle mb-5" data-toggle="buttons">
-  <label class="btn btn-primary active">
-    <input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" value="2" autocomplete="off"> Back Camera
-  </label> 
-</div>
-  <p>Scanning</p>
-  <em></em>
-  <span></span>
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
-
-<!-- <label class="switch switch-left-right">
-	<input class="switch-input" type="checkbox" id="clockoffOnValue" />
-	<span class="switch-label" data-on="On" data-off="Off"></span> 
-	<span class="switch-handle"></span> 
-</label> -->
-</div> 
-</div> 
+<body ng-app="myApp">
+	<div ng-controller="qrController">
+		<div class="ocrloader">
+			<video id="previewss"></video>
+			<div class="btn-group btn-group-toggle mb-5" data-toggle="buttons">
+				<label class="btn btn-primary active"> <input type="radio"
+					name="options" value="1" autocomplete="off" checked> Front
+					Camera
+				</label> <label class="btn btn-secondary"> <input type="radio"
+					name="options" value="2" autocomplete="off"> Back Camera
+				</label>
+			</div>
+			<p>Scanning</p>
+			<em></em> <span></span>
+		</div>
+	</div>
 </body>
-<link rel="stylesheet"
-	href="styles.css" />
-<script type="text/javascript" src="instascan.min.js"></script>
-<script type="text/javascript" src="qrcontrol.js"></script>
-<script src="jquery.min.js"></script>
 
-</html>
-
+<link rel="stylesheet" href="css/styles.css" />
+<script src="lib/angular.min.js"></script>
+<script type="text/javascript" src="js/instascan.min.js"></script>
+<script type="text/javascript" src="js/qrcontrol.js"></script>
+<script src="js/jquery.min.js"></script>
+<html>
