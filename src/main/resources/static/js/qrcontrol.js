@@ -2,39 +2,51 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('qrController', ['$scope', function($scope) { 
-	
+	$scope.lableclockName='Clock Off';
+	$scope.loadLookUpCode = function(loadLookUpCode){
+		if(loadLookUpCode!='N'){
+			$scope.lableclockName='Clock On';
+			$scope.clockin=true;
+		}else{
+			$scope.lableclockName='Clock Off';
+			$scope.clockin=false;
+		}
+	}
 	var scanner = new Instascan.Scanner({
 	   video: document.getElementById('previewss'), scanPeriod: 5, mirror: false });
 scanner.addListener('scan',function(content){
  //var test= content;  
 	var clockin= true;
-	 var test="http://www.letslearnever.com/0001/1/1/A"; 
+	 //var test="http://www.letslearnever.com/0001/1/1/A"; 
 	 
 	// var x = document.getElementById("clockoffOnValue.switch-input").value;
 	 //alert(x);
 	  //	$scope.title1 =content;
-	  	var tt = test.split("/");
-	  	var schoolCode = tt[3];
-	  	var stdID = tt[4];
-	  	var stdClass = tt[5];
-	  	var stdSec=tt[6];
+	  	var urllArray = content.split("/");
+	  	var schoolCode = urllArray[3];
+	  	var stdID = urllArray[4];
+	  	var stdClass = urllArray[5];
+	  	var stdSec=urllArray[6];
 	  	
-	  	if(clockin){
+	  	if($scope.clockin==true){
 	  		var url = "http://localhost:8080/smjh/attendance/insert";
 	  		var data1 = {
-    	  			"studentname":"ssss tom",
+    	  			"studentname":"",
     	  			"classe":stdClass, 
     	  			"section":stdSec ,
     	  			"studentid":stdID,
+    	  			"schoolcode":schoolCode,
+    	  			"attendancestatus":"present",
     	  			"clockontime": "",
     	  			"clockofftime":"",
     	  			"breaktime":"",
-    	  			"attendancestatus":"present"
+    	  			"durationminute":"",
+    	  			"durationhours":""
+    	  			
     	  	}
     	  	
 	  	}else{
 	  	var url = "http://localhost:8080/smjh/attendance/updateById/"+stdID;
-	  		//var url = "http://localhost:8080/smjh/attendance/updateById/19";
 	  	}
 	  	
 	  	var xhr = new XMLHttpRequest();

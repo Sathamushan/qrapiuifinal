@@ -49,12 +49,10 @@ public class AttendanceQueryController
 	}
 	
 	private void playSound() {
-
 		//This gets the path to the project, but not into /src for eclipse
 		String path = new File("E:\\QRAPINEW\\Spring-Boot-Minimal-Web-App-main\\src\\main\\resources\\path\\beep-01a.wav").toString();
 		//Make a File object with a path to the audio file.
 		File sound = new File(path);
-
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(sound);
 			Clip c = AudioSystem.getClip();
@@ -69,12 +67,12 @@ public class AttendanceQueryController
 	}
 	
 	@PostMapping("/updateById/{id}")
-	public AttendanceEntity insertAttandance(@PathVariable(value="id") Long id)
+	public AttendanceEntity insertAttandance(@PathVariable(value="id") Long studId)
 	{
 		log.info("-----> saveAttendanceEntity controller");
 		log.info("-----> updateAttandanceDetails serviceImpl");
 		playSound();
-		return attendanceServiceImpl.updateAttandanceById(id);
+		return attendanceServiceImpl.updateAttandanceById(studId);
 	}
 
 

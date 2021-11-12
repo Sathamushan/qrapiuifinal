@@ -18,7 +18,16 @@
 			</div>
 			<p>Scanning</p>
 			<em></em> <span></span>
+			
+			<input type="checkbox"  id="lookupcheck"
+							name="lookupcheck" ng-model="lookUp"
+							ng-true-value="'Y'" ng-false-value="'N'" ng-checked="lookUp=='Y'"  ng-change="loadLookUpCode(lookUp)">
+		<label class="btn btn-primary active"> {{lableclockName}}
+				</label>
 		</div>
+		
+	
+		
 	</div>
 </body>
 

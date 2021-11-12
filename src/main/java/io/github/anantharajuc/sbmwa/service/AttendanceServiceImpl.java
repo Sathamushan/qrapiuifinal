@@ -31,7 +31,7 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 			attEntity.setClasse(attendanceEntity.getClasse());
 			attEntity.setSection(attendanceEntity.getSection());	
 			attEntity.setClockontime(new Date());	
-			attEntity.setClockofftime(new Date());
+			attEntity.setClockofftime(null);
 			attEntity.setBreaktime(attendanceEntity.getBreaktime());
 			attEntity.setSchoolcode(attendanceEntity.getSchoolcode());
 			attEntity.setDurationhours(attendanceEntity.getDurationhours());
@@ -68,7 +68,7 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 			attendanceEntityRepository.deleteById(id);
 		}
 	}
-
+	
 	
 	@Override
 	public AttendanceEntity updateAttandanceById(Long id) {
@@ -81,16 +81,6 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 	        Timestamp currentTimestamp = new Timestamp(now.getTime());
 			attEntity.setClockofftime(currentTimestamp);
 				calculateDuration(attEntity);
-			/*
-			attEntity.setStudentid(attenEntityUpdated.getStudentid());
-			attEntity.setStudentname(attenEntityUpdated.getStudentname());
-			attEntity.setClasse(attenEntityUpdated.getClasse());
-			attEntity.setSection(attenEntityUpdated.getSection());	
-			attEntity.setClockontime(attenEntityUpdated.getClockontime());	
-			attEntity.setClockofftime(attenEntityUpdated.getClockofftime());
-			attEntity.setBreaktime(attenEntityUpdated.getBreaktime());
-			attEntity.setAttendancestatus(attenEntityUpdated.getAttendancestatus());
-		*/
 			}
 		return attendanceEntityRepository.save(attEntity);
 	}
