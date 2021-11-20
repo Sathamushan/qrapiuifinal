@@ -23,9 +23,12 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 	public AttendanceEntity insertAttandanceDetails(AttendanceEntity attendanceEntity) 
 	{
 		log.info("-----> saveAttendanceDetails serviceImpl");
+		  
 		log.info("-----> attendanceEntity "+ attendanceEntity.getAttendancestatus());
 		AttendanceEntity attEntity = new AttendanceEntity ();
 		if(attendanceEntity != null) {
+			long millis=System.currentTimeMillis();  
+			java.sql.Date date=new java.sql.Date(millis);  
 			attEntity.setStudentid(attendanceEntity.getStudentid());
 			attEntity.setStudentname(attendanceEntity.getStudentname());
 			attEntity.setClasse(attendanceEntity.getClasse());
@@ -36,7 +39,8 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 			attEntity.setSchoolcode(attendanceEntity.getSchoolcode());
 			attEntity.setDurationhours(attendanceEntity.getDurationhours());
 			attEntity.setDurationminute(attendanceEntity.getDurationminute());
-			attEntity.setAttendancestatus(attendanceEntity.getAttendancestatus());	
+			attEntity.setAttendancestatus(attendanceEntity.getAttendancestatus());
+			attEntity.setCurrentdate(date);
 		}
 		return attendanceEntityRepository.save(attEntity);
 	}
@@ -71,10 +75,13 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 	
 	
 	@Override
-	public AttendanceEntity updateAttandanceById(Long id) {
+	public AttendanceEntity updateAttandanceById(Long studId) {
 		log.info("-----> updateAttandanceById serviceImpl");
-		AttendanceEntity attEntity = attendanceEntityRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("AttendanceEntity", "id", id));
+		long millis=System.currentTimeMillis();  
+		java.sql.Date date=new java.sql.Date(millis);  
+		System.out.println(date);
+		AttendanceEntity attEntity = attendanceEntityRepository.getStudentById(studId, date);
+				//.orElseThrow(() -> new ResourceNotFoundException("AttendanceEntity", "id", id));
 		if(attEntity!= null) {
 			Calendar calendar = Calendar.getInstance();
 	        java.util.Date now = calendar.getTime();

@@ -41,8 +41,8 @@ scanner.addListener('scan',function(content){
     	  			"clockofftime":"",
     	  			"breaktime":"",
     	  			"durationminute":"",
-    	  			"durationhours":""
-    	  			
+    	  			"durationhours":"",
+    	  			"currentdate":""
     	  	}
     	  	
 	  	}else{

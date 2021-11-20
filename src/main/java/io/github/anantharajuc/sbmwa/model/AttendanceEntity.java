@@ -77,6 +77,8 @@ public class AttendanceEntity extends AuditEntity
 	@Column(name="schoolcode", nullable = true)
 	String schoolcode;
 	
+	@Column(name="currentdate", nullable = true)
+	Date currentdate; 
 	/*
 	table: attendance
 	columns:

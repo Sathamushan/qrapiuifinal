@@ -45,7 +45,6 @@ public class AttendanceQueryController
 		//File sound = new File("/resources/path/beep-01a.wav");
 	    playSound();
 		return attendanceServiceImpl.insertAttandanceDetails(attendanceEntity);
-		//return null;
 	}
 	
 	private void playSound() {
@@ -66,8 +65,8 @@ public class AttendanceQueryController
 		}
 	}
 	
-	@PostMapping("/updateById/{id}")
-	public AttendanceEntity insertAttandance(@PathVariable(value="id") Long studId)
+	@PostMapping("/updateById/{stdID}")
+	public AttendanceEntity insertAttandance(@PathVariable(value="stdID") Long studId)
 	{
 		log.info("-----> saveAttendanceEntity controller");
 		log.info("-----> updateAttandanceDetails serviceImpl");
