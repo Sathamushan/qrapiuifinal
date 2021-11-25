@@ -28,7 +28,13 @@ scanner.addListener('scan',function(content){
 	  	var stdClass = urllArray[5];
 	  	var stdSec=urllArray[6];
 	  	
+	  	var d = new Date(); // for now
+	  	d.getHours(); // => 10
+	  //	d.getMinutes(); // =>  30
+	  //	d.getSeconds(); // => 51
+	  	console.log("hour"+d.getHours())
 	  	if($scope.clockin==true){
+	  	//if(d.getHours() <=10){
 	  		var url = "http://localhost:8080/smjh/attendance/insert";
 	  		var data1 = {
     	  			"studentname":"",

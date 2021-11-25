@@ -10,13 +10,13 @@
 	</parent>
 	
 	<groupId>io.github.anantharajuc</groupId>
-	<artifactId>spring-boot-minimal-web-app</artifactId>
+	<artifactId>ScanQRApi</artifactId>
 	<version>latest</version>
 	<packaging>jar</packaging>
 	
-	<name>Spring-Boot-Minimal-Web-App</name>
+	<name>ScanQRApi</name>
 	<url>https://github.com/Spring-Boot-Framework/Spring-Boot-Minimal-Web-App</url>
-	<description>Spring Boot Minimal Web Application</description>
+	<description>ScanQRApi</description>
 	
 	<!-- Start - Spring-Boot-Minimal-Web-App Project Owner -->
 	<developers>
@@ -26,9 +26,9 @@
 			<timezone>UTC+05:30</timezone>
 		</developer>
 	</developers>
-	<!-- End - Spring-Boot-Minimal-Web-App Project Owner -->
+	<!-- End - ScanQRApi Project Owner -->
 	
-	<!-- Start - Spring-Boot-Minimal-Web-App source repository -->
+	<!-- Start - ScanQRApi source repository -->
     <scm>
         <connection>https://github.com/Spring-Boot-Framework/Spring-Boot-Minimal-Web-App.git</connection>
         <developerConnection>git@github.com:Spring-Boot-Framework/Spring-Boot-Minimal-Web-App.git</developerConnection>
