@@ -22,15 +22,6 @@ public class TimetableServiceImpl implements ITimetableService
 		return timetableEntityRepository.save(timetableEntity);
 	}
 	
-	
-	/**
-	 * Delete data based upon id
-	 * 
-	 * @param id
-	 */
-	public void deleteTimetable(Long id) {
-		timetableEntityRepository.deleteById(id);
-	}
 
 	@Override		
 	public TimetableEntity updateTimetable(Long id, TimetableEntity timetableEntity) {
@@ -50,6 +41,16 @@ public class TimetableServiceImpl implements ITimetableService
 			timetableEntityData.setTt_time(timetableEntity.getTt_time());
 		}
 		return timetableEntityRepository.save(timetableEntityData);
+	}
+	
+	
+	/**
+	 * Delete data based upon id
+	 * 
+	 * @param id
+	 */
+	public void deleteTimetable(Long id) {
+		timetableEntityRepository.deleteById(id);
 	}
 	
 }

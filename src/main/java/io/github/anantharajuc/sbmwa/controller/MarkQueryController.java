@@ -19,13 +19,13 @@ public class MarkQueryController
 	private MarksEntityRepository marksEntityRepository;
 	
 	@GetMapping()	
-	public List<MarksEntity> findAllStudents()
+	public List<MarksEntity> findAllMarks()
 	{
 		return marksEntityRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")	
-	public MarksEntity findStudentById(@PathVariable Long id)
+	public MarksEntity findMarksById(@PathVariable Long id)
 	{
 		return marksEntityRepository.getById(id);
 	}
