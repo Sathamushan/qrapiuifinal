@@ -23,7 +23,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-@CrossOrigin
 public class TimetableEntity extends AuditEntity
 {
 	

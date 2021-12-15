@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
+@CrossOrigin
 public class StudentEntity extends AuditEntity
 {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +43,7 @@ public class StudentEntity extends AuditEntity
 	
 	
 	@Column(name="dateofbirth", nullable = true)
-	Date dateofbirth;
+	String dateofbirth;
 	
 
 	@Column(name="placeofbirth", nullable = true)
@@ -53,8 +55,8 @@ public class StudentEntity extends AuditEntity
 	@Column(name="religion", nullable = true)
 	String religion;
 	
-	@Column(name="classe", nullable = true)
-	String classe;
+	/*@Column(name="classe", nullable = true)
+	String classe;*/
 	
 	@Column(name="mothertongue", nullable = true)
 	String mothertongue;
@@ -82,7 +84,11 @@ public class StudentEntity extends AuditEntity
 	@Column(name="fathersoccupation", nullable = true)
 	String fathersoccupation;
 
-
+	
+	
+	@Column(name="mothernameinenglish", nullable = true)
+	String mothernameinenglish;
+	
 	@Column(name="mothernameintamil", nullable = true)
 	String mothernameintamil;
 
@@ -140,7 +146,18 @@ public class StudentEntity extends AuditEntity
 	
 	@Column(name="mediumofinstruction", nullable = true)
 	String mediumofinstruction;
-
+	
+	@Column(name="section", nullable = true)
+	String section;
+	
+	
+	@Column(name="caste", nullable = true)
+	String caste;
+	
+	@Column(name="rollno", nullable = true)
+	String rollno;
+	
+	
 
 	/*@Column(name="name", nullable = true)
 	String name;

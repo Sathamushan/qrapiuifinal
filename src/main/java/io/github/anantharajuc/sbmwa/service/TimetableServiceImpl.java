@@ -2,6 +2,7 @@ package io.github.anantharajuc.sbmwa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import io.github.anantharajuc.sbmwa.exception.ResourceNotFoundException;
 import io.github.anantharajuc.sbmwa.model.TimetableEntity;
@@ -10,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
+@CrossOrigin
 public class TimetableServiceImpl implements ITimetableService
 {
 	@Autowired
