@@ -54,6 +54,11 @@ public class HomeWorkEntity extends AuditEntity
 	@Column(name="assignmentdescriprion", nullable = true)
 	String assignmentdescriprion;
 	
+	@Column(name="hwsubdate", nullable = true)
+	String hwsubdate;
+	
+	
+	
 	
 	/*
 	table: homeworkdetails

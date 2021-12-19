@@ -35,7 +35,7 @@ public class AttendanceEntity extends AuditEntity
 	int  attendanceid;
 	*/
 	@Column(name="studentid", nullable = true)
-	int  studentid;
+	Long  studentid;
 	
 	@Column(name="studentname", nullable = true)
 	String studentname;

@@ -39,6 +39,8 @@ public class HomeWorkServiceImpl implements IHomeWorkServiceImpl {
 			homeWorkData.setClassteachername(homeWorkEntity.getClassteachername());
 			homeWorkData.setSection(homeWorkEntity.getSection());
 			homeWorkData.setSubject(homeWorkEntity.getSubject());
+			homeWorkData.setHwsubdate(homeWorkEntity.getHwsubdate());
+			
 		}
 		return homeWorkEntityRepository.save(homeWorkData);
 	}

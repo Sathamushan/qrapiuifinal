@@ -9,29 +9,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.anantharajuc.sbmwa.model.HomeWorkEntity;
-import io.github.anantharajuc.sbmwa.repository.HomeWorkEntityRepository;
+import io.github.anantharajuc.sbmwa.model.StaffsEntity;
+import io.github.anantharajuc.sbmwa.repository.StaffsEntityRepository;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/smjh/homework")
-public class HomeWorkQueryController 
+@RequestMapping("/smjh/staff")
+public class StaffQueryController 
 {
 	@Autowired
-	private  HomeWorkEntityRepository  homeWorkEntityRepository;
+	private StaffsEntityRepository staffsEntityRepository;
 	
 	@GetMapping()	
-	public List<HomeWorkEntity> findHomework()
+	public List<StaffsEntity> findAllStudents()
 	{
-		return homeWorkEntityRepository.findAll();
+		return staffsEntityRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")	
-	public HomeWorkEntity findHomeworkById(@PathVariable Long id)
+	public StaffsEntity findStaffById(@PathVariable Long id)
 	{
-		
-		return homeWorkEntityRepository.findById(id).get(); 
-		
+		return staffsEntityRepository.findById(id).get(); 
 	}
 
 }

@@ -34,7 +34,9 @@ public class HolidayServiceImpl implements IHolidayServiceImpl {
 			holidaydata.setHolidayname(holidayEntity.getHolidayname());
 			holidaydata.setHolidaytype(holidayEntity.getHolidaytype());
 			holidaydata.setRemarks(holidayEntity.getRemarks());
-			holidaydata.setWeekday(holidayEntity.getWeekday());
+			holidaydata.setEnddate(holidayEntity.getEnddate());
+			holidaydata.setStartdate(holidayEntity.getStartdate());
+			
 		}
 		return holidayEntityRepository.save(holidaydata);
 	}

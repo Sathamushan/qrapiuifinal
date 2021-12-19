@@ -1,6 +1,7 @@
 package io.github.anantharajuc.sbmwa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @RequestMapping("/smjh/holiday")
 @Log4j2
+@CrossOrigin
 public class HolidayCommandController {
 
 

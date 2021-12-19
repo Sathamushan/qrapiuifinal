@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.github.anantharajuc.sbmwa.model.AttendanceEntity;
+
 @Repository
 public interface AttendanceEntityRepository extends JpaRepository<AttendanceEntity, Long>
 {

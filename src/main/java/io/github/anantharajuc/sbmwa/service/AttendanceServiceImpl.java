@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import io.github.anantharajuc.sbmwa.exception.ResourceNotFoundException;
 import io.github.anantharajuc.sbmwa.model.AttendanceEntity;
+import io.github.anantharajuc.sbmwa.model.StudentEntity;
 import io.github.anantharajuc.sbmwa.repository.AttendanceEntityRepository;
+import io.github.anantharajuc.sbmwa.repository.StudentEntityRepository;
 import lombok.extern.log4j.Log4j2;
 
 @Service
@@ -18,6 +20,8 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 {
 	@Autowired
 	private AttendanceEntityRepository attendanceEntityRepository;
+	@Autowired
+	private StudentEntityRepository  studentEntityRepository;
 
 	@Override
 	public AttendanceEntity insertAttandanceDetails(AttendanceEntity attendanceEntity) 
@@ -29,10 +33,7 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 		if(attendanceEntity != null) {
 			long millis=System.currentTimeMillis();  
 			java.sql.Date date=new java.sql.Date(millis);  
-			attEntity.setStudentid(attendanceEntity.getStudentid());
-			attEntity.setStudentname(attendanceEntity.getStudentname());
-			attEntity.setClasse(attendanceEntity.getClasse());
-			attEntity.setSection(attendanceEntity.getSection());	
+			getStudentData(attEntity,attendanceEntity.getStudentid());
 			attEntity.setClockontime(new Date());	
 			attEntity.setClockofftime(null);
 			attEntity.setBreaktime(attendanceEntity.getBreaktime());
@@ -45,16 +46,28 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 		return attendanceEntityRepository.save(attEntity);
 	}
 
+	private void getStudentData(AttendanceEntity attEntity, Long studentid) {
+		StudentEntity studEntityResult = studentEntityRepository.findById(studentid)
+				.orElseThrow(() -> new ResourceNotFoundException("StudentEntity", "id", studentid));
+		if(studEntityResult != null) {
+			attEntity.setStudentid(studEntityResult.getId());
+			attEntity.setStudentname(studEntityResult.getStudentnameinenglish());
+			attEntity.setClasse(studEntityResult.getClassforwhich());
+			attEntity.setSection(studEntityResult.getSection());	
+		}
+	}
+
 	@Override
 	public AttendanceEntity updateAttandanceDetails(Long id, AttendanceEntity attenEntityUpdated) {
 		log.info("-----> updateAttandanceDetails serviceImpl");
 		AttendanceEntity attEntity = attendanceEntityRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("AttendanceEntity", "id", id));
 		if(attEntity!= null) {
-			attEntity.setStudentid(attenEntityUpdated.getStudentid());
+			getStudentData(attEntity,id);
+			/*attEntity.setStudentid(attenEntityUpdated.getStudentid());
 			attEntity.setStudentname(attenEntityUpdated.getStudentname());
 			attEntity.setClasse(attenEntityUpdated.getClasse());
-			attEntity.setSection(attenEntityUpdated.getSection());	
+			attEntity.setSection(attenEntityUpdated.getSection());	*/
 			attEntity.setClockontime(attenEntityUpdated.getClockontime());	
 			attEntity.setClockofftime(attenEntityUpdated.getClockofftime());
 			attEntity.setBreaktime(attenEntityUpdated.getBreaktime());

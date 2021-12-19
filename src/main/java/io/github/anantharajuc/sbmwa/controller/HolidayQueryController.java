@@ -3,6 +3,7 @@ package io.github.anantharajuc.sbmwa.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import io.github.anantharajuc.sbmwa.model.HolidayEntity;
 import io.github.anantharajuc.sbmwa.repository.HolidayEntityRepository;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/smjh/holiday")
 public class HolidayQueryController 
 {
@@ -27,7 +29,7 @@ public class HolidayQueryController
 	@GetMapping("/{id}")	
 	public HolidayEntity findHolidayById(@PathVariable Long id)
 	{
-		return holidayEntityRepository.getById(id);
+		return holidayEntityRepository.findById(id).get(); 
 	}
 
 }
