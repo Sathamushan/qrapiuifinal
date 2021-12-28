@@ -32,18 +32,20 @@ public class BooksEntity extends AuditEntity
 	/*@Column(name="bookid", nullable = true)
 	int  bookid;*/
 	
-	@Column(name="studentname", nullable = true)
+	/*@Column(name="studentname", nullable = true)
 	String studentname;
 	
 	@Column(name="parentname", nullable = true)
-	String parentname;
+	String parentname;*/
 	
+	@Column(name="title", nullable = true)
+	String title;
 	
 	@Column(name="classe", nullable = true)
 	String classe;
 	
-	@Column(name="section", nullable = true)
-	String section;
+	/*@Column(name="section", nullable = true)
+	String section;*/
 	
 	@Column(name="subject", nullable = true)
 	String subject;

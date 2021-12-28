@@ -9,5 +9,5 @@ import io.github.anantharajuc.sbmwa.model.StudentEntity;
 @Repository
 public interface StudentEntityRepository  extends JpaRepository<StudentEntity, Long>
 {
-
+	
 }

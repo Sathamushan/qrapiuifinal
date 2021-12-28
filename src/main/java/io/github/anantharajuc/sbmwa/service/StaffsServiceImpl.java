@@ -44,6 +44,7 @@ public class StaffsServiceImpl implements IStaffsService{
 			staffsEntityResult.setGender(staffsEntityUpdate.getGender());	
 			staffsEntityResult.setMobilenumber(staffsEntityUpdate.getMobilenumber());	
 			staffsEntityResult.setPriexperiencedetail(staffsEntityUpdate.getPriexperiencedetail());	
+			staffsEntityResult.setPhotourl(staffsEntityUpdate.getPhotourl());
 		}
 		return staffEntityRepository.save(staffsEntityResult);
 	}

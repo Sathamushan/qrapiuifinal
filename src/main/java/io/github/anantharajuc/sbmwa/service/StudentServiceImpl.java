@@ -1,12 +1,19 @@
 package io.github.anantharajuc.sbmwa.service;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import io.github.anantharajuc.sbmwa.exception.ResourceNotFoundException;
 
+import io.github.anantharajuc.sbmwa.exception.ResourceNotFoundException;
+import io.github.anantharajuc.sbmwa.model.StudentCountEntity;
 import io.github.anantharajuc.sbmwa.model.StudentEntity;
 import io.github.anantharajuc.sbmwa.repository.StudentEntityRepository;
 import lombok.extern.log4j.Log4j2;
+
 
 
 @Service
@@ -15,7 +22,9 @@ public class StudentServiceImpl implements IStudentService {
 
 	@Autowired
 	private StudentEntityRepository  studentEntityRepository;
-
+	
+	@Autowired
+	EntityManagerFactory entityFact ;
 	
 	@Override
 	public StudentEntity insertStudentDetails(StudentEntity studentEntity) {
@@ -87,7 +96,5 @@ public class StudentServiceImpl implements IStudentService {
 			studentEntityRepository.deleteById(id);
 		}
 	}
-	
-	
 
 }

@@ -10,13 +10,13 @@
 	</parent>
 	
 	<groupId>io.github.anantharajuc</groupId>
-	<artifactId>ScanQRApi</artifactId>
+	<artifactId>UIApicallscanQR</artifactId>
 	<version>latest</version>
 	<packaging>jar</packaging>
 	
-	<name>ScanQRApi</name>
+	<name>UIApicallscanQR</name>
 	<url>https://github.com/Spring-Boot-Framework/Spring-Boot-Minimal-Web-App</url>
-	<description>ScanQRApi</description>
+	<description>UIApicallscanQR</description>
 	
 	<!-- Start - Spring-Boot-Minimal-Web-App Project Owner -->
 	<developers>

@@ -1,0 +1,33 @@
+package io.github.anantharajuc.sbmwa.service;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import io.github.anantharajuc.sbmwa.model.StudentCountEntity;
+import lombok.extern.log4j.Log4j2;
+
+
+
+@Service
+@Log4j2
+public class CommonService  {
+
+		
+	@Autowired
+	EntityManagerFactory entityFact ;
+	
+	
+	public List<StudentCountEntity> studentDisplayDetails() {
+		EntityManager entityManager = entityFact.createEntityManager();
+		@SuppressWarnings("unchecked")
+		List<StudentCountEntity> studList = entityManager.createNativeQuery("select COUNT(*) as tot,COUNT(case when studentdetail.gender='male' then 1 end)"
+				+ " as male,COUNT(case when studentdetail.gender='female' then 1 end) as female from studentdetail where studentdetail.gender is not null;" )
+				.getResultList();
+		return studList ;
+	}
+}

@@ -2,6 +2,7 @@ package io.github.anantharajuc.sbmwa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import io.github.anantharajuc.sbmwa.exception.ResourceNotFoundException;
 import io.github.anantharajuc.sbmwa.model.BooksEntity;
@@ -10,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
+@CrossOrigin
 public class BooksServiceImpl implements IBooksService{
 	
 	@Autowired
@@ -18,7 +20,7 @@ public class BooksServiceImpl implements IBooksService{
 	public BooksEntity saveBookDetails(BooksEntity booksEntity) {
 		
 		log.info("-----> saveBookDetails serviceImpl");
-		log.info("-----> booksEntity "+ booksEntity.getStudentname());
+		log.info("-----> booksEntity "+ booksEntity.getClasse());
 		return booksEntityRepository.save(booksEntity);
 	}
 
@@ -29,12 +31,10 @@ public class BooksServiceImpl implements IBooksService{
 				.orElseThrow(() -> new ResourceNotFoundException("BooksEntity", "id", id));
 		
 		if(booksEntityResult!= null) {
-			booksEntityResult.setParentname(booksEntityUpdate.getParentname());
-			booksEntityResult.setStudentname(booksEntityUpdate.getStudentname());
 			booksEntityResult.setClasse(booksEntityUpdate.getClasse());
 			booksEntityResult.setDownloadurl(booksEntityUpdate.getDownloadurl());
-			booksEntityResult.setSection(booksEntityUpdate.getSection());	
-			booksEntityResult.setSubject(booksEntityUpdate.getSubject());	
+			booksEntityResult.setSubject(booksEntityUpdate.getSubject());
+			booksEntityResult.setSubject(booksEntityUpdate.getTitle());
 		}
 		return booksEntityRepository.save(booksEntityResult);
 	}

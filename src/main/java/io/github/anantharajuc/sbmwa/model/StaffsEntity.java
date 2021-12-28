@@ -73,7 +73,11 @@ public class StaffsEntity extends AuditEntity
 	String address;	
 	
 	@Column(name="dateofjoining", nullable = true)
-	String dateofjoining;	
+	String dateofjoining;
+	
+	@Column(name="photourl", nullable = true)
+	String photourl;
+	
 	
 	
 }

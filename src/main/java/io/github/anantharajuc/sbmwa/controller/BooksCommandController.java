@@ -1,6 +1,7 @@
 package io.github.anantharajuc.sbmwa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/smjh/books")
 @Log4j2
 @RestController
+@CrossOrigin
 public class BooksCommandController {
 	
 		
@@ -26,7 +28,7 @@ public class BooksCommandController {
 	public BooksEntity saveBookDetails(@RequestBody BooksEntity booksEntity)
 	{
 		log.info("-----> saveBookDetails controller");
-		log.info("-----> booksEntity "+ booksEntity.getParentname());
+		log.info("-----> booksEntity "+ booksEntity.getClasse());
 		return booksServiceImpl.saveBookDetails(booksEntity);
 	}
 	
