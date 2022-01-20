@@ -20,31 +20,29 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name="attendance")
+@Table(name="staffattendance")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class AttendanceEntity extends AuditEntity
+public class StaffAttendanceEntity extends AuditEntity
 {
 	private static final long serialVersionUID = 1L;
 
-/*	@Column(name="attendanceid", nullable = true)
-	int  attendanceid;
-	*/
-	@Column(name="studentid", nullable = true)
-	Long  studentid;
+
+	@Column(name="staffid", nullable = true)
+	Long  staffid;
 	
-	@Column(name="studentname", nullable = true)
-	String studentname;
+	@Column(name="name", nullable = true)
+	String name;
 	
-	@Column(name="classe", nullable = true)
-	String classe;
+	@Column(name="designation", nullable = true)
+	String designation;
 	
-	@Column(name="section", nullable = true)
-	String section;
+	@Column(name="department", nullable = true)
+	String department;
 	
 	@Column(name="clockontime", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -79,19 +77,6 @@ public class AttendanceEntity extends AuditEntity
 	
 	@Column(name="currentdate", nullable = true)
 	Date currentdate; 
-	/*
-	table: attendance
-	columns:
-	attendanceid int(11) ai pk 
-	studentid varchar(45) 
-	studentname varchar(45) 
-	class varchar(45) 
-	section varchar(45) 
-	clockontime varchar(45) 
-	clockofftime varchar(45) 
-	breaktime varchar(45) 
-	attendancestatus varchar(45)*/
-
 	
 }
 

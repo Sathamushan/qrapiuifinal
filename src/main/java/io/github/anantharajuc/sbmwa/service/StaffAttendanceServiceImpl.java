@@ -8,32 +8,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.github.anantharajuc.sbmwa.exception.ResourceNotFoundException;
-import io.github.anantharajuc.sbmwa.model.AttendanceEntity;
-import io.github.anantharajuc.sbmwa.model.StudentEntity;
-import io.github.anantharajuc.sbmwa.repository.AttendanceEntityRepository;
-import io.github.anantharajuc.sbmwa.repository.StudentEntityRepository;
+import io.github.anantharajuc.sbmwa.model.StaffAttendanceEntity;
+import io.github.anantharajuc.sbmwa.model.StaffsEntity;
+import io.github.anantharajuc.sbmwa.repository.StaffAttendanceEntityRepository;
+import io.github.anantharajuc.sbmwa.repository.StaffsEntityRepository;
 import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
-public class AttendanceServiceImpl	 implements IAttendanceService
+public class StaffAttendanceServiceImpl	 implements IStaffAttendanceService
 {
 	@Autowired
-	private AttendanceEntityRepository attendanceEntityRepository;
+	private StaffAttendanceEntityRepository staffattendanceEntityRepository;
 	@Autowired
-	private StudentEntityRepository  studentEntityRepository;
+	private StaffsEntityRepository  staffEntityRepository;
 
 	@Override
-	public AttendanceEntity insertAttandanceDetails(AttendanceEntity attendanceEntity) 
+	public StaffAttendanceEntity insertstaffAttandanceDetails(StaffAttendanceEntity attendanceEntity) 
 	{
 		log.info("-----> saveAttendanceDetails serviceImpl");
 		  
 		log.info("-----> attendanceEntity "+ attendanceEntity.getAttendancestatus());
-		AttendanceEntity attEntity = new AttendanceEntity ();
+		StaffAttendanceEntity attEntity = new StaffAttendanceEntity ();
 		if(attendanceEntity != null) {
 			long millis=System.currentTimeMillis();  
 			java.sql.Date date=new java.sql.Date(millis);  
-			getStudentData(attEntity,attendanceEntity.getStudentid());
+			getStaffData(attEntity,attendanceEntity.getId());
 			attEntity.setClockontime(new Date());	
 			attEntity.setClockofftime(null);
 			attEntity.setBreaktime(attendanceEntity.getBreaktime());
@@ -43,57 +43,53 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 			attEntity.setAttendancestatus(attendanceEntity.getAttendancestatus());
 			attEntity.setCurrentdate(date);
 		}
-		return attendanceEntityRepository.save(attEntity);
+		return staffattendanceEntityRepository.save(attEntity);
 	}
 
-	private void getStudentData(AttendanceEntity attEntity, Long studentid) {
-		StudentEntity studEntityResult = studentEntityRepository.findById(studentid)
-				.orElseThrow(() -> new ResourceNotFoundException("StudentEntity", "id", studentid));
-		if(studEntityResult != null) {
-			attEntity.setStudentid(studEntityResult.getId());
-			attEntity.setStudentname(studEntityResult.getStudentnameinenglish());
-			attEntity.setClasse(studEntityResult.getClassforwhich());
-			attEntity.setSection(studEntityResult.getSection());	
+	private void getStaffData(StaffAttendanceEntity attEntity, Long staffid) {
+		StaffsEntity staffEntityResult = staffEntityRepository.findById(staffid)
+				.orElseThrow(() -> new ResourceNotFoundException("StaffEntity", "id", staffid));
+		if(staffEntityResult != null) {
+			attEntity.setId(staffEntityResult.getId());
+			attEntity.setName(staffEntityResult.getName());
+			attEntity.setDepartment(staffEntityResult.getDepartment());
+			attEntity.setDesignation(staffEntityResult.getDesignation());	
 		}
 	}
 
 	@Override
-	public AttendanceEntity updateAttandanceDetails(Long id, AttendanceEntity attenEntityUpdated) {
+	public StaffAttendanceEntity updatestaffAttandanceDetails(Long id, StaffAttendanceEntity attenEntityUpdated) {
 		log.info("-----> updateAttandanceDetails serviceImpl");
-		AttendanceEntity attEntity = attendanceEntityRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("AttendanceEntity", "id", id));
+		StaffAttendanceEntity attEntity = staffattendanceEntityRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("StaffAttendanceEntity", "id", id));
 		if(attEntity!= null) {
-			getStudentData(attEntity,id);
-			/*attEntity.setStudentid(attenEntityUpdated.getStudentid());
-			attEntity.setStudentname(attenEntityUpdated.getStudentname());
-			attEntity.setClasse(attenEntityUpdated.getClasse());
-			attEntity.setSection(attenEntityUpdated.getSection());	*/
+			getStaffData(attEntity,id);
 			attEntity.setClockontime(attenEntityUpdated.getClockontime());	
 			attEntity.setClockofftime(attenEntityUpdated.getClockofftime());
 			attEntity.setBreaktime(attenEntityUpdated.getBreaktime());
 			attEntity.setAttendancestatus(attenEntityUpdated.getAttendancestatus());
 		}
-		return attendanceEntityRepository.save(attEntity);
+		return staffattendanceEntityRepository.save(attEntity);
 	}
 
 	public void deleteAttandance(Long id) {
 
 		log.info("-----> deleteAttandance serviceImpl");
-		attendanceEntityRepository.deleteById(id);
-		AttendanceEntity attendanceEntity = attendanceEntityRepository.getById(id);
+		staffattendanceEntityRepository.deleteById(id);
+		StaffAttendanceEntity attendanceEntity = staffattendanceEntityRepository.getById(id);
 		if(attendanceEntity!=  null) {
-			attendanceEntityRepository.deleteById(id);
+			staffattendanceEntityRepository.deleteById(id);
 		}
 	}
 	
 	
 	@Override
-	public AttendanceEntity updateAttandanceById(Long studId) {
+	public StaffAttendanceEntity updatestaffAttandanceById(Long studId) {
 		log.info("-----> updateAttandanceById serviceImpl");
 		long millis=System.currentTimeMillis();  
 		java.sql.Date date=new java.sql.Date(millis);  
 		System.out.println(date);
-		AttendanceEntity attEntity = attendanceEntityRepository.getStudentById(studId, date);
+		StaffAttendanceEntity attEntity = staffattendanceEntityRepository.getStaffById(studId, date);
 				//.orElseThrow(() -> new ResourceNotFoundException("AttendanceEntity", "id", id));
 		if(attEntity!= null) {
 			Calendar calendar = Calendar.getInstance();
@@ -102,10 +98,10 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 			attEntity.setClockofftime(currentTimestamp);
 				calculateDuration(attEntity);
 			}
-		return attendanceEntityRepository.save(attEntity);
+		return staffattendanceEntityRepository.save(attEntity);
 	}
 
-	private void calculateDuration(AttendanceEntity attEntity) {
+	private void calculateDuration(StaffAttendanceEntity attEntity) {
 		Date d1 = null;
 		Date d2 = null;
 		d1 = attEntity.getClockontime();
@@ -123,6 +119,8 @@ public class AttendanceServiceImpl	 implements IAttendanceService
 			attEntity.setDurationhours(diffHours);
 		}	
 	}
+
+	
 
 
 }

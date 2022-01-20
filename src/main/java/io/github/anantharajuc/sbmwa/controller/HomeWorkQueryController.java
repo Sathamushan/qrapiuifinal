@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.anantharajuc.sbmwa.model.HomeWorkEntity;
+import io.github.anantharajuc.sbmwa.model.StaffsEntity;
 import io.github.anantharajuc.sbmwa.repository.HomeWorkEntityRepository;
 
 @RestController
@@ -33,5 +34,12 @@ public class HomeWorkQueryController
 		return homeWorkEntityRepository.findById(id).get(); 
 		
 	}
+	
+	
+	@GetMapping("/getUniqHomeworkData/{classe}/{section}")
+	public List<HomeWorkEntity> getUniqHomeworkData(@PathVariable("classe") String classe,@PathVariable("section") String section) {	
+		return homeWorkEntityRepository.getHomeworkData(classe,section);
+	}
+	
 
 }

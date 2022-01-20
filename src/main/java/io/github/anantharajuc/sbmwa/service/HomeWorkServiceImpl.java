@@ -40,6 +40,8 @@ public class HomeWorkServiceImpl implements IHomeWorkServiceImpl {
 			homeWorkData.setSection(homeWorkEntity.getSection());
 			homeWorkData.setSubject(homeWorkEntity.getSubject());
 			homeWorkData.setHwsubdate(homeWorkEntity.getHwsubdate());
+			homeWorkData.setHwsubtime(homeWorkEntity.getHwsubtime());
+			homeWorkData.setHwpriority(homeWorkEntity.getHwpriority());
 			
 		}
 		return homeWorkEntityRepository.save(homeWorkData);

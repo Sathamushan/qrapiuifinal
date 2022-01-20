@@ -40,15 +40,13 @@ public class StudentQueryController
 	private StudentEntityRepository studentEntityRepository;
 	
 	@GetMapping()	
-	public List<StudentEntity> findAllStudents()
-	{
+	public List<StudentEntity> findAllStudents() {
 		return studentEntityRepository.findAll();
 	}
 	
 	
 	@GetMapping("/{id}")	
-	public StudentEntity findStudentById(@PathVariable Long id)
-	{
+	public StudentEntity findStudentById(@PathVariable Long id)	{
 		return studentEntityRepository.findById(id).get(); 
 	}
 	

@@ -32,4 +32,8 @@ public class StaffQueryController
 		return staffsEntityRepository.findById(id).get(); 
 	}
 
+	@GetMapping("/getClassStaffByStud/{classe}/{section}")
+	public  StaffsEntity getClassByStudId(@PathVariable("classe") String classe,@PathVariable("section") String section) {	
+		return staffsEntityRepository.getClassByStudId(classe,section);
+	}
 }

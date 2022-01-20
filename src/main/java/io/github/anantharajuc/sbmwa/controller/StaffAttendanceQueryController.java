@@ -16,39 +16,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
-import io.github.anantharajuc.sbmwa.model.AttendanceEntity;
-import io.github.anantharajuc.sbmwa.repository.AttendanceEntityRepository;
-import io.github.anantharajuc.sbmwa.service.AttendanceServiceImpl;
+import io.github.anantharajuc.sbmwa.model.StaffAttendanceEntity;
+import io.github.anantharajuc.sbmwa.repository.StaffAttendanceEntityRepository;
+import io.github.anantharajuc.sbmwa.service.StaffAttendanceServiceImpl;
 import lombok.extern.log4j.Log4j2;
 
 @RestController
-@RequestMapping("/smjh/attendance")
+@RequestMapping("/smjh/staffAttendance")
 @Log4j2
 @CrossOrigin
-public class AttendanceQueryController 
+public class StaffAttendanceQueryController 
 {
 	@Autowired
-	private AttendanceEntityRepository attendanceEntityRepository;
+	private StaffAttendanceEntityRepository staffattendanceEntityRepository;
 	
 	@Autowired
-	private AttendanceServiceImpl attendanceServiceImpl;
+	private  StaffAttendanceServiceImpl staffattendanceServiceImpl;
 	
 	@GetMapping()	
-	public List<AttendanceEntity> findAllAttendance()
+	public List<StaffAttendanceEntity> findAllStaffAttendance()
 	{
-		return attendanceEntityRepository.findAll();
+		return staffattendanceEntityRepository.findAll();
 	}
 	
 	@PostMapping("/insert")
-	public AttendanceEntity insertAttandance(@RequestBody AttendanceEntity attendanceEntity)
+	public  StaffAttendanceEntity insertstaffAttandance(@RequestBody  StaffAttendanceEntity staffattendanceEntity)
 	{
-		log.info("-----> saveAttendanceEntity controller");
-		log.info("-----> attendanceEntity "+ attendanceEntity.getStudentname());
-		//File sound = new File("/resources/path/beep-01a.wav");
+		log.info("-----> insertstaffAttandance controller");
+		log.info("-----> attendanceEntity "+ staffattendanceEntity.getAttendancestatus());
 	    playSound();
-		return attendanceServiceImpl.insertAttandanceDetails(attendanceEntity);
+		return staffattendanceServiceImpl.insertstaffAttandanceDetails(staffattendanceEntity);
 	}
 	
 	private void playSound() {
@@ -70,19 +67,19 @@ public class AttendanceQueryController
 	}
 	
 	@PostMapping("/updateById/{stdID}")
-	public AttendanceEntity insertAttandance(@PathVariable(value="stdID") Long studId)
+	public  StaffAttendanceEntity insertStaffAttandance(@PathVariable(value="stdID") Long studId)
 	{
-		log.info("-----> saveAttendanceEntity controller");
-		log.info("-----> updateAttandanceDetails serviceImpl");
+		log.info("-----> insertStaffAttandance controller");
+		log.info("-----> updatestaffAttandanceById serviceImpl");
 		playSound();
-		return attendanceServiceImpl.updateAttandanceById(studId);
+		return staffattendanceServiceImpl.updatestaffAttandanceById(studId);
 	}
 
 
 	@GetMapping("/{id}")	
-	public AttendanceEntity findAttendanceById(@PathVariable(value="id") Long id)
+	public  StaffAttendanceEntity findStaffAttendanceById(@PathVariable(value="id") Long id)
 	{
-		return attendanceEntityRepository.findById(id).get();
+		return staffattendanceEntityRepository.findById(id).get();
 	}
 
 }

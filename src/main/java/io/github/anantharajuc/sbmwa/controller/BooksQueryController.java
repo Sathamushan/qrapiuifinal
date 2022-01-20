@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.anantharajuc.sbmwa.model.BooksEntity;
+import io.github.anantharajuc.sbmwa.model.StaffsEntity;
 import io.github.anantharajuc.sbmwa.repository.BooksEntityRepository;
 import lombok.extern.log4j.Log4j2;
 
@@ -36,6 +37,11 @@ public class BooksQueryController
 	{
 		log.info("-----> QueryController find by Id");
 		return booksEntityRepository.findById(id).get();  
+	}
+	
+	@GetMapping("/getUniqBooks/{classe}")
+	public List<BooksEntity> getUniqBooks(@PathVariable("classe") String classe) {	
+		return booksEntityRepository.getUniqBooks(classe);
 	}
 
 }

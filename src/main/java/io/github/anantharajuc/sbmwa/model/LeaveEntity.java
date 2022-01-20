@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,12 +25,16 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
+@CrossOrigin
 public class LeaveEntity extends AuditEntity
 {
 	private static final long serialVersionUID = 1L;
-
-	/*@Column(name="leaveid", nullable = true)
-	int  leaveid;*/
+	
+	@Column(name="studentid", nullable = true)
+	String studentid; 
+	
+	@Column(name="studentname", nullable = true)
+	String studentname;
 	
 	@Column(name="classe", nullable = true)
 	String  classe;

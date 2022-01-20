@@ -57,6 +57,11 @@ public class HomeWorkEntity extends AuditEntity
 	@Column(name="hwsubdate", nullable = true)
 	String hwsubdate;
 	
+	@Column(name="hwsubtime", nullable = true)
+	String hwsubtime;
+	
+	@Column(name="hwpriority", nullable = true)
+	String hwpriority;
 	
 	
 	

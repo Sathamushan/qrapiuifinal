@@ -6,6 +6,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
+@CrossOrigin
 public class FeedBackEntity extends AuditEntity
 {
 	private static final long serialVersionUID = 1L;

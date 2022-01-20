@@ -1,14 +1,21 @@
 package io.github.anantharajuc.sbmwa.controller;
 
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import io.github.anantharajuc.sbmwa.model.AttenceRecordCountEntity;
+import io.github.anantharajuc.sbmwa.model.StaffsEntity;
 import io.github.anantharajuc.sbmwa.model.StudentCountEntity;
 import io.github.anantharajuc.sbmwa.service.CommonService;
 import lombok.extern.log4j.Log4j2;
@@ -37,7 +46,7 @@ public class CommonController
 {
 	@Autowired
 	public CommonService commonService;
-	
+
 	@GetMapping("/studentDisplay")
 	public List<StudentCountEntity> studentDisplayDetails()
 	{	
@@ -45,9 +54,19 @@ public class CommonController
 		return commonService.studentDisplayDetails();
 	}
 	
+	@GetMapping("/totalAttendanceReport/{id}")
+	public List<AttenceRecordCountEntity> totalAttendanceReport(@PathVariable("id") String id) {	
+		log.info("-----> totalAttendanceReport controller");
+		return commonService.attendanceReport(id);
+	}
 	
 	
-	
+	/*@GetMapping("/getClassByStudId/{classe}/{section}")
+	public  Object getClassByStudId(@PathVariable("classe") String classe,@PathVariable("section") String section) {	
+		log.info("-----> getClassByStudId controller");
+		return commonService.getClassByStudId(classe,section);
+	}*/
+
 	@PostMapping("/smsfileupload/{id}/{source}")
 	public Object fileUpload(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("id") String id,@PathVariable("source") String source)
@@ -69,14 +88,18 @@ public class CommonController
 				fileName = mFile.getOriginalFilename();
 				System.out.println(fileName);
 				if(source.equalsIgnoreCase("staff")) {
-					 rootPath = "E:\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\staff\\";
-				}else {
-					 rootPath = "E:\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\student\\";
+					rootPath = "E:\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\staff\\";
+				}else if(source.equalsIgnoreCase("leave")) {
+					rootPath = "E:\\StudentUIFinal\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\leave\\";
+				}
+				else {
+					rootPath = "E:\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\student\\";
 				}
 				String[] fileNameSplit = fileName.split("\\.");
 				java.nio.file.Path path = Paths.get(rootPath +id+"." + fileNameSplit[1]);
 				Files.deleteIfExists(path);
 				InputStream in = mFile.getInputStream();
+				//resizeImage(in,path);
 				Files.copy(in, path);
 				absoluteFileName=rootPath +id+"."+ fileNameSplit[1];
 				filePath = path.toString();
@@ -106,10 +129,36 @@ public class CommonController
 
 			json = "{\"filePath\":" + "\"" + filePath + "\", \"fileName\":" + "\"" + fileName + "\"}";
 		}
-
 		return new ResponseEntity<Object>(json, HttpStatus.OK);
+	}
+
+	private void resizeImage(InputStream is, Path path) {
+		try {
+
+	        Image image = ImageIO.read(is);
+
+	        BufferedImage bi = this.createResizedCopy(image, 180, 180, true);
+	        //ImageIO.write(bi, "jpg", path);
+
+	    } catch (IOException e) {
+	        System.out.println("Error");
+	    }
+
+	
 		
-		}
+	}
 	
 	
+	BufferedImage createResizedCopy(Image originalImage, int scaledWidth, int scaledHeight, boolean preserveAlpha) {
+	    int imageType = preserveAlpha ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
+	    BufferedImage scaledBI = new BufferedImage(scaledWidth, scaledHeight, imageType);
+	    Graphics2D g = scaledBI.createGraphics();
+	    if (preserveAlpha) {
+	        g.setComposite(AlphaComposite.Src);
+	    }
+	    g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null);
+	    g.dispose();
+	    return scaledBI;
+	}
+
 }
