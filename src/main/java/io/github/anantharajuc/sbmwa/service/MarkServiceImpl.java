@@ -28,15 +28,21 @@ public class MarkServiceImpl implements IMarkService{
 				.orElseThrow(() -> new ResourceNotFoundException("MarksEntity", "id", id));
 		
 		if(marksEntityResult!= null) {
+			marksEntityResult.setStudentid(marksEntityUpdate.getStudentid());
 			marksEntityResult.setStudentname(marksEntityUpdate.getStudentname());
 			marksEntityResult.setClasse(marksEntityUpdate.getClasse());
 			marksEntityResult.setSection(marksEntityUpdate.getSection());	
 			marksEntityResult.setSubject(marksEntityUpdate.getSubject());
-			marksEntityResult.setMark(marksEntityUpdate.getMark());
+			marksEntityResult.setTamil(marksEntityUpdate.getTamil());
+			marksEntityResult.setEnglish(marksEntityUpdate.getEnglish());
+			marksEntityResult.setMaths(marksEntityUpdate.getMaths());
+			marksEntityResult.setScience(marksEntityUpdate.getScience());
+			marksEntityResult.setSocialscience(marksEntityUpdate.getSocialscience());
 			marksEntityResult.setMax_mark(marksEntityUpdate.getMax_mark());
-			marksEntityResult.setAvg(marksEntityUpdate.getAvg());
-			marksEntityResult.setStudentid(marksEntityUpdate.getStudentid());
+			marksEntityResult.setTotal(marksEntityUpdate.getTotal());
 			marksEntityResult.setResult(marksEntityUpdate.getResult());
+			marksEntityResult.setGrade(marksEntityUpdate.getGrade());
+			marksEntityResult.setExamtitle(marksEntityUpdate.getExamtitle());
 		}
 		return marksEntityRepository.save(marksEntityResult);
 	}

@@ -6,6 +6,7 @@ public interface ILeaveService
 {
 	LeaveEntity saveLeave(LeaveEntity leaveEntity);
 	LeaveEntity updateLeave(Long id, LeaveEntity leaveEntityUpdated);
+	void updateLeaveStatus(Long id, String status);
 
 
 }

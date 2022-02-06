@@ -8,5 +8,8 @@ public interface IFeedbackService
 
 	FeedBackEntity updateFeedback(Long id, FeedBackEntity feedBackUpdated);
 
+	void updateFeedbackStatus(Long id, String fbStatus, String fbresponce);
+
+
 
 }

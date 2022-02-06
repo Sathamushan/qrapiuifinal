@@ -26,7 +26,6 @@ import lombok.experimental.FieldDefaults;
 @CrossOrigin
 public class MarksEntity extends AuditEntity
 {
-		
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="studentname", nullable = true)
@@ -45,32 +44,53 @@ public class MarksEntity extends AuditEntity
 	String subject;
 	
 	
-	@Column(name="mark", nullable = true)
-	String mark;
+	@Column(name="examtitle", nullable = true)
+	String examtitle;
+	
+	@Column(name="tamil", nullable = true)
+	String tamil;
+	
+	@Column(name="english", nullable = true)
+	String english;
+	
+	@Column(name="maths", nullable = true)
+	String maths;
+	
+	@Column(name="science", nullable = true)
+	String science;
+	
+	@Column(name="socialscience", nullable = true)
+	String socialscience;
 	
 	@Column(name="max_mark", nullable = true)
 	String max_mark;
 	
-	@Column(name="avg", nullable = true)
-	String avg;
+	@Column(name="total", nullable = true)
+	String total;
+	
+	@Column(name="grade", nullable = true)
+	String grade;
 	
 	@Column(name="result", nullable = true)
 	String result;
 	
 	
-	
-	
-	/*`studentid` varchar(45) default null,
-	  `studentname` varchar(45) default null,
-	  `classe` varchar(45) default null,
-	  `section` varchar(45) default null,
-	  `subject` varchar(45) default null,
-	  `mark` varchar(45) default null,
-	  `max_mark` varchar(45) default null,
-	  `result` varchar(45) default null,
-	  `avg` varchar(45) default null,*/
-	
-	
-	
+	/*studentid varchar(45) 
+	studentname varchar(45) 
+	classe varchar(45) 
+	section varchar(45) 
+	examtitle varchar(45) 
+	subject varchar(45) 
+	tamil varchar(45) 
+	english varchar(45) 
+	maths varchar(45) 
+	science varchar(45) 
+	socialscience varchar(45) 
+	total varchar(45) 
+	max_mark varchar(45) 
+	grade varchar(45) 
+	result varchar(45) */
+
+		
 }
 

@@ -42,11 +42,19 @@ public class LeaveEntity extends AuditEntity
 	@Column(name="section", nullable = true)
 	String  section;
 	
-	@Column(name="leavefromdate", nullable = true)
+/*	@Column(name="leavefromdate", nullable = true)
 	Date  leavefromdate;
 	
 	@Column(name="leavetodate", nullable = true)
-	Date  leavetodate;
+	Date  leavetodate;*/
+	
+	
+	@Column(name="leavefromdate", nullable = true)
+	String  leavefromdate;
+	
+	@Column(name="leavetodate", nullable = true)
+	String  leavetodate;
+	
 	
 	@Column(name="approvalstatus", nullable = true)
 	String  approvalstatus;

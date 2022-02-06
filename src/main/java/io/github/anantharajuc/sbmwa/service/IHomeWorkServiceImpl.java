@@ -8,6 +8,4 @@ public interface IHomeWorkServiceImpl {
 
 	HomeWorkEntity updateHomework(Long id, HomeWorkEntity homeWorkEntity);
 
-	
-
 }

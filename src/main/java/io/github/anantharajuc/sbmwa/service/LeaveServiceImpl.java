@@ -42,5 +42,13 @@ public class LeaveServiceImpl implements ILeaveService
 		}
 		return leaveEntityRepository.save(leaveData);
 	}
+
+
+	@Override
+	public void updateLeaveStatus(Long id, String status) {
+		log.info("-----> updateLeaveStatus serviceImpl");
+		leaveEntityRepository.updateLeaveStatus(status,id);
+		
+	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.anantharajuc.sbmwa.model.BooksEntity;
 import io.github.anantharajuc.sbmwa.model.FeedBackEntity;
 import io.github.anantharajuc.sbmwa.repository.FeedBackEntityRepository;
 
@@ -32,4 +33,9 @@ public class FeedBackQueryController
 		return feedBackEntityRepository.findById(id).get();
 	}
 
+	
+	@GetMapping("/getfbByStudId/{studId}")
+	public List<FeedBackEntity> getfbByStudId(@PathVariable("studId") String studId) {	
+		return feedBackEntityRepository.getfbByStudId(studId);
+	}
 }

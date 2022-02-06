@@ -48,6 +48,14 @@ public class FeedBackEntity extends AuditEntity
 	@Column(name="studentid", nullable = true)
 	String studentid; 
 	
+	
+	@Column(name="fbstatus", nullable = true)
+	String fbstatus; 
+	
+	@Column(name="fbresponce", nullable = true)
+	String fbresponce; 
+	
+	
 
 	/*@Column(name="feedbackid", nullable = true)
 	int  feedbackid;*/

@@ -2,6 +2,7 @@ package io.github.anantharajuc.sbmwa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,13 @@ public class LeaveCommandController {
 	public LeaveEntity updateLeave(@PathVariable("id") Long id,@RequestBody LeaveEntity leaveEntityUpdated)
 	{		
 		return leaveServiceImpl.updateLeave(id, leaveEntityUpdated);
+	}
+	
+	
+	@GetMapping("/updateLeaveStatus/{id}/{status}")
+	public void updateLeaveStatus(@PathVariable("id") Long id,@PathVariable("status") String status)
+	{
+		leaveServiceImpl.updateLeaveStatus(id,status);
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.anantharajuc.sbmwa.model.FeedBackEntity;
 import io.github.anantharajuc.sbmwa.model.LeaveEntity;
 import io.github.anantharajuc.sbmwa.repository.LeaveEntityRepository;
 
@@ -30,6 +31,11 @@ public class LeaveQueryController
 	public LeaveEntity findStudentById(@PathVariable Long id)
 	{
 		return leaveEntityRepository.getById(id);
+	}
+	
+	@GetMapping("/getleaveDataByStudId/{studId}")
+	public List<LeaveEntity> getleaveDataByStudId(@PathVariable("studId") String studId) {	
+		return leaveEntityRepository.getleaveDataByStudId(studId);
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.anantharajuc.sbmwa.model.FeedBackEntity;
 import io.github.anantharajuc.sbmwa.model.MarksEntity;
 import io.github.anantharajuc.sbmwa.repository.MarksEntityRepository;
 
@@ -31,6 +32,11 @@ public class MarkQueryController
 	{
 		return marksEntityRepository.findById(id).get(); 
 		//return marksEntityRepository.getById(id);
+	}
+	
+	@GetMapping("/getmarkByStudId/{studId}")
+	public List<MarksEntity> getmarkByStudId(@PathVariable("studId") String studId) {	
+		return marksEntityRepository.getmarkByStudId(studId);
 	}
 
 }
