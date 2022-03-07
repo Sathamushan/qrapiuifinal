@@ -4,12 +4,18 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -160,5 +166,134 @@ public class CommonController
 	    g.dispose();
 	    return scaledBI;
 	}
+	
+	
+	
+	
+	@PostMapping("/bulkUpload/{id}/{source}")
+	public Object bulkUpload(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("id") String id,@PathVariable("source") String source)
+	{
+		MultipartHttpServletRequest mRequest;
+		String absoluteFileName=null;
+		String filePath = null;
+		String fileName = null;
+		Map<String, String> statusMap = new HashMap<String, String>();
+		try {
+			mRequest = (MultipartHttpServletRequest) request;
+			Object test = request.getCharacterEncoding();
+			Object test1 = request.getHeaderNames();
+			Iterator itr = mRequest.getFileNames();
+			String rootPath ="";
+			while (itr.hasNext()) {
+				String value = (String) itr.next();
+				MultipartFile mFile = mRequest.getFile(value);
+				fileName = mFile.getOriginalFilename();
+				System.out.println(fileName);
+				if(source.equalsIgnoreCase("staff")) {
+					rootPath = "E:\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\staff\\";
+				}else if(source.equalsIgnoreCase("leave")) {
+					rootPath = "E:\\StudentUIFinal\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\leave\\";
+				}
+				else if(source.equalsIgnoreCase("import")) {
+					rootPath = "E:\\angularUI-main\\angularUI-main\\src\\main\\webapp\\resources\\js\\app\\images\\import\\";
+				}
+				String[] fileNameSplit = fileName.split("\\.");
+				java.nio.file.Path path = Paths.get(rootPath +id+"." + fileNameSplit[1]);
+				Files.deleteIfExists(path);
+				InputStream in = mFile.getInputStream();
+				//resizeImage(in,path);
+				Files.copy(in, path);
+				absoluteFileName=rootPath +id+"."+ fileNameSplit[1];
+				filePath = path.toString();
+			}
+			statusMap.put("sucess", "sucess");
+			statusMap.put("failure", null);
+		}
 
-}
+		catch (NoSuchFileException fileExp) {
+			statusMap.put("failure", "Please check the file upload path");
+			return new ResponseEntity<Object>(statusMap, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			e.printStackTrace();
+			statusMap.put("failure", e.getCause().toString());
+			return new ResponseEntity<Object>(statusMap, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		bulkImport();
+		
+		
+		
+		String osname = System.getProperty("os.name");
+		System.out.println("osname.................................");
+		System.out.println(osname);
+		String json = null;
+
+		if (osname.indexOf("Win") >= 0) {
+			filePath = filePath.replaceAll("\\\\", "/");
+			json = "{\"filePath\":" + "\"" + filePath + "\", \"fileName\":" + "\"" + fileName + "\"}";
+		} else {
+
+			json = "{\"filePath\":" + "\"" + filePath + "\", \"fileName\":" + "\"" + fileName + "\"}";
+		}
+		return new ResponseEntity<Object>(json, HttpStatus.OK);
+	}
+	
+
+	private void bulkImport() {
+		String fileName ="E:\\APIQRFINALUI\\FinalApiforUI\\src\\main\\resources\\path\\SCHOOLTESTDATA.xlsx";
+		try (BufferedReader bf = new BufferedReader(new FileReader(new File(fileName))); Connection con = getOtherSchemaConnection();){
+			String line = null;
+			String columnHeader = bf.readLine();
+			System.out.println("Header :" + columnHeader);
+			String[] rowHeader = columnHeader.split(",", -1);
+			StringBuilder insertQuery;
+			StringBuilder insertQueryInitial = new StringBuilder();
+			insertQueryInitial.append("insert into studentdetails(" + columnHeader
+					+ ",CONTACT_STATUS,SMS_SOURCE_ID,SMS_SOURCE_TYPE,TEMPLATEID,SMS_GATEWAY,SMS_CREATE_DATE) values(");
+			while ((line = bf.readLine()) != null) {
+				line = line.replaceAll("\\'", "\\\\'");
+				String[] row = line.split(",", -1);
+				insertQuery = new StringBuilder();
+				insertQuery.append(insertQueryInitial.toString());
+				//	insertQuery.append("'NEW',").append(smsfileId).append(",'FILE',").append(templateId).append(",'VF','").append(new Timestamp(new Date().getTime())).append("')");
+				System.out.println(insertQuery.toString());
+				try (PreparedStatement ppt = con.prepareStatement(insertQuery.toString())) {
+					ppt.executeUpdate();
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				insertQuery = null;
+
+			}
+
+		}
+		catch (Exception e) {
+
+			System.out.println(e.getMessage());
+		}
+
+
+	} 
+	
+	
+	
+
+	public Connection getOtherSchemaConnection() {
+		Connection connection = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/smjsys_qa";
+			String username = "smjsys_qa";
+			String password = "smjsys_qa";
+			connection = DriverManager.getConnection(url, username, password);
+		} catch (Exception ee) {
+			System.out.println(ee.getMessage());
+		}
+		return connection;
+
+	}
+		
+	}
