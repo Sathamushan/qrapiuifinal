@@ -10,6 +10,7 @@ import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -23,10 +24,11 @@ public class TestBulk {
 	private static void bulkImport() {
 
 		try {
-			String fileName ="E:\\APIQRFINALUI\\FinalApiforUI\\src\\main\\resources\\path\\StudentListData.xlsx";
+			String fileName ="E:\\APIQRFINALUI\\FinalApiforUI\\src\\main\\resources\\path\\StudentListDataNew.xlsx";
 			OPCPackage fis = OPCPackage.open(new File(fileName));
 			XSSFWorkbook wb = new XSSFWorkbook(fis);
-			XSSFSheet sheet = wb.getSheetAt(0);
+			//XSSFSheet sheet = wb.getSheetAt(0);
+			 Sheet sheet=  wb.getSheetAt(0);
 			boolean headerFlag = false;
 			StringBuilder columnHeader = new StringBuilder();
 			StringBuilder insertQuery = new StringBuilder();
@@ -35,18 +37,9 @@ public class TestBulk {
 			int headerCount = 0;
 			String headerColumns= " `rollno`,`studentnameinenglish`,`studentnameintamil`, `section`,`classforwhich`,`fathernameinenglish`,`fathersoccupation`, `mothernameinenglish`,"
 					+ "  `mothersoccupation`,`guardiannameinenglish`,`guardianoccupation`,`aadharnumber` , `mobilenumber`, `dateofbirth` ,`gender`,`dateofjoining`,"
-					+ " `streetnameareaname`, `pincode`,`bloodgroup`,`religion`,`mediumofinstruction` ,`admissionnumber`, `classe`,`disabilitygroupname`,`mothertongue`,`photourl`";
+					+ " `streetnameareaname`, `pincode`,`bloodgroup`,`religion`,`mediumofinstruction` ,`admissionnumber`, `classe`,`disabilitygroupname`,`mothertongue`,`groupcode`,`photourl`";
 			FormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
-			String value=null;  
-			Row row=sheet.getRow(vRow); //returns the logical row  
-			Cell cell=row.getCell(vColumn); //getting the cell representing the given column  
-			value=cell.getStringCellValue();    //getting cell value  
 			
-			//   Iterator<Row> rowIterator = sheet.iterator();
-			/* Row header = sheet.getRow(0);
-		        int n = header.getLastCellNum();
-		        String header1 = header.getCell(0).getStringCellValue();
-		        String header2 = header.getCell(1).getStringCellValue();*/
 			for (Row row : sheet) // iteration over row using for each loop
 			{
 				int count=0;
@@ -67,7 +60,7 @@ public class TestBulk {
 								headerFlag = false;
 								break;
 							case Cell.CELL_TYPE_STRING: 
-							 	System.out.print(cell.getStringCellValue());
+							 	//System.out.print(cell.getStringCellValue());
 							 	count++;
 									String cellValue = cell.getStringCellValue().replaceAll("\\'", "\\\\'");
 									insertValue.append("'" + cellValue).append("',");
@@ -93,12 +86,11 @@ public class TestBulk {
 					
 					insertQuery.append(insertValue.toString());
 					insertQuery.append("null").append(")");
-				//	System.out.println("insertQueryInitial"+insertQuery);
-				/*	try (Connection con = getOtherSchemaConnection(); PreparedStatement stmt4 = con.prepareStatement(insertQuery.toString());) {
+					try (Connection con = getOtherSchemaConnection(); PreparedStatement stmt4 = con.prepareStatement(insertQuery.toString());) {
 						stmt4.executeUpdate();
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
-					}*/
+					}
 
 				}
 				System.out.println(insertQuery.toString());
@@ -114,44 +106,7 @@ public class TestBulk {
 	
 		
 		
-		
-		
-		
-		/*
-		
-		String fileName ="E:\\APIQRFINALUI\\FinalApiforUI\\src\\main\\resources\\path\\SCHOOLTESTDATA.xlsx";
-		try (BufferedReader bf = new BufferedReader(new FileReader(new File(fileName))); Connection con = getOtherSchemaConnection();){
-			String line = null;
-			String columnHeader = bf.readLine();
-			System.out.println("Header :" + columnHeader);
-			String[] rowHeader = columnHeader.split(",", -1);
-			StringBuilder insertQuery;
-			StringBuilder insertQueryInitial = new StringBuilder();
-			insertQueryInitial.append("insert into studentdetails(" + columnHeader
-					+ ",CONTACT_STATUS,SMS_SOURCE_ID,SMS_SOURCE_TYPE,TEMPLATEID,SMS_GATEWAY,SMS_CREATE_DATE) values(");
-			while ((line = bf.readLine()) != null) {
-				line = line.replaceAll("\\'", "\\\\'");
-				String[] row = line.split(",", -1);
-				insertQuery = new StringBuilder();
-				insertQuery.append(insertQueryInitial.toString());
-				//	insertQuery.append("'NEW',").append(smsfileId).append(",'FILE',").append(templateId).append(",'VF','").append(new Timestamp(new Date().getTime())).append("')");
-				System.out.println(insertQuery.toString());
-				try (PreparedStatement ppt = con.prepareStatement(insertQuery.toString())) {
-					ppt.executeUpdate();
-
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-				insertQuery = null;
-
-			}
-
-		}
-		catch (Exception e) {
-
-			System.out.println(e.getMessage());
-		}
-	*/}
+	}
 	
 	
 	public static Connection getOtherSchemaConnection() {
@@ -159,7 +114,7 @@ public class TestBulk {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/smjsys_qa";
+			String url = "jdbc:mysql://localhost:3306/smjsys_qa?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=TRUE&characterEncoding=utf-8";
 			String username = "smjsys_qa";
 			String password = "smjsys_qa";
 			connection = DriverManager.getConnection(url, username, password);

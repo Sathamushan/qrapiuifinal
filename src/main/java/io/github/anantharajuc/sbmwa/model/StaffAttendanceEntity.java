@@ -45,21 +45,21 @@ public class StaffAttendanceEntity extends AuditEntity
 	String department;
 	
 	@Column(name="clockontime", nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	Date clockontime;
+	//@Temporal(TemporalType.TIMESTAMP)
+   // @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	String clockontime;
 	
 	
 	@Column(name="clockofftime", nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	Date clockofftime; 
+//	@Temporal(TemporalType.TIMESTAMP)
+  //  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	String clockofftime; 
 	
 	
 	@Column(name="breaktime", nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	Date breaktime; 
+	//@Temporal(TemporalType.TIMESTAMP)
+   // @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	String breaktime; 
 	
 	@Column(name="attendancestatus", nullable = true)
 	String attendancestatus;

@@ -38,7 +38,7 @@ public class StaffsServiceImpl implements IStaffsService{
 			staffsEntityResult.setDesignation(staffsEntityUpdate.getDesignation());	
 			staffsEntityResult.setDob(staffsEntityUpdate.getDob());
 			staffsEntityResult.setDateofjoining(staffsEntityUpdate.getDateofjoining());
-			
+			staffsEntityResult.setQualification(staffsEntityUpdate.getQualification());
 			staffsEntityResult.setEmail(staffsEntityUpdate.getEmail());	
 			staffsEntityResult.setExperience(staffsEntityUpdate.getExperience());	
 			staffsEntityResult.setGender(staffsEntityUpdate.getGender());	

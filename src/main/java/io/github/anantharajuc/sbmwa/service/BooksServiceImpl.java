@@ -34,7 +34,7 @@ public class BooksServiceImpl implements IBooksService{
 			booksEntityResult.setClasse(booksEntityUpdate.getClasse());
 			booksEntityResult.setDownloadurl(booksEntityUpdate.getDownloadurl());
 			booksEntityResult.setSubject(booksEntityUpdate.getSubject());
-			booksEntityResult.setSubject(booksEntityUpdate.getTitle());
+			booksEntityResult.setTitle(booksEntityUpdate.getTitle());
 		}
 		return booksEntityRepository.save(booksEntityResult);
 	}
